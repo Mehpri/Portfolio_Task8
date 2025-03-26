@@ -4,106 +4,106 @@ CHIP DisplayCounter201748294 {
 
     PARTS:
     // Input inversions
-    Not(in = A, out = notA);
-    Not(in = B, out = notB);
-    Not(in = C, out = notC);
-    Not(in = D, out = notD);
+   Not(in=A, out=notA);
+    Not(in=B, out=notB);
+    Not(in=C, out=notC);
+    Not(in=D, out=notD);
 
     // Segment a
-    And(a = notB, b = C, out = a_term1);
-    And(a = A, b = notB, out = a_term2);
-    And(a = notA, b = B, out = a_temp3);
-    And(a = a_temp3, b = notC, out = a_term3);
-    And(a = C, b = notD, out = a_term4);
-    And(a = A, b = D, out = a_term5);
-    Or(a = a_term1, b = a_term2, out = a_or1);
-    Or(a = a_term3, b = a_term4, out = a_or2);
-    Or(a = a_or1, b = a_or2, out = a_or3);
-    Or(a = a_or3, b = a_term5, out = a);
+    And(a=notB, b=C, out=a1);
+    And(a=A, b=notB, out=a2);
+    And(a=notA, b=B, out=a3t);
+    And(a=a3t, b=notC, out=a3);
+    And(a=C, b=notD, out=a4);
+    And(a=A, b=D, out=a5);
+    Or(a=a1, b=a2, out=ao1);
+    Or(a=a3, b=a4, out=ao2);
+    Or(a=ao1, b=ao2, out=ao3);
+    Or(a=ao3, b=a5, out=a);
 
     // Segment b
-    And(a = B, b = notC, out = b_temp1);
-    And(a = b_temp1, b = D, out = b_term1);
-    And(a = A, b = notB, out = b_temp2);
-    And(a = b_temp2, b = D, out = b_term2);
-    And(a = notA, b = notB, out = b_temp3);
-    And(a = b_temp3, b = notD, out = b_term3);
-    And(a = B, b = C, out = b_temp4);
-    And(a = b_temp4, b = notD, out = b_term4);
-    And(a = A, b = notC, out = b_term5);
-    And(a = notA, b = notB, out = b_temp6);
-    And(a = b_temp6, b = C, out = b_term6);
-    Or(a = b_term1, b = b_term2, out = b_or1);
-    Or(a = b_term3, b = b_term4, out = b_or2);
-    Or(a = b_term5, b = b_term6, out = b_or3);
-    Or(a = b_or1, b = b_or2, out = b_or4);
-    Or(a = b_or4, b = b_or3, out = b);
+    And(a=B, b=notC, out=b1t);
+    And(a=b1t, b=D, out=b1);
+    And(a=A, b=notB, out=b2t);
+    And(a=b2t, b=D, out=b2);
+    And(a=notA, b=notB, out=b3t);
+    And(a=b3t, b=notD, out=b3);
+    And(a=B, b=C, out=b4t);
+    And(a=b4t, b=notD, out=b4);
+    And(a=A, b=notC, out=b5);
+    And(a=notA, b=notB, out=b6t);
+    And(a=b6t, b=C, out=b6);
+    Or(a=b1, b=b2, out=bo1);
+    Or(a=b3, b=b4, out=bo2);
+    Or(a=b5, b=b6, out=bo3);
+    Or(a=bo1, b=bo2, out=bo4);
+    Or(a=bo4, b=bo3, out=b);
 
     // Segment c
-    And(a = notA, b = notC, out = c_temp1);
-    And(a = c_temp1, b = notD, out = c_term1);
-    And(a = notA, b = C, out = c_temp2);
-    And(a = c_temp2, b = D, out = c_term2);
-    And(a = notB, b = notD, out = c_term3);
-    And(a = A, b = notC, out = c_temp4);
-    And(a = c_temp4, b = D, out = c_term4);
-    And(a = notA, b = notB, out = c_term5);
-    Or(a = c_term1, b = c_term2, out = c_or1);
-    Or(a = c_term3, b = c_term4, out = c_or2);
-    Or(a = c_or1, b = c_or2, out = c_or3);
-    Or(a = c_or3, b = c_term5, out = c);
+    And(a=notA, b=notC, out=c1t);
+    And(a=c1t, b=notD, out=c1);
+    And(a=notA, b=C, out=c2t);
+    And(a=c2t, b=D, out=c2);
+    And(a=notB, b=notD, out=c3);
+    And(a=A, b=notC, out=c4t);
+    And(a=c4t, b=D, out=c4);
+    And(a=notA, b=notB, out=c5);
+    Or(a=c1, b=c2, out=co1);
+    Or(a=c3, b=c4, out=co2);
+    Or(a=co1, b=co2, out=co3);
+    Or(a=co3, b=c5, out=c);
 
     // Segment d
-    And(a = notB, b = notD, out = d_term1);
-    And(a = notA, b = C, out = d_term2);
-    And(a = notA, b = B, out = d_temp3);
-    And(a = d_temp3, b = D, out = d_term3);
-    And(a = A, b = notB, out = d_temp4);
-    And(a = d_temp4, b = notC, out = d_term4);
-    And(a = A, b = notD, out = d_term5);
-    And(a = B, b = C, out = d_term6);
-    Or(a = d_term1, b = d_term2, out = d_or1);
-    Or(a = d_term3, b = d_term4, out = d_or2);
-    Or(a = d_term5, b = d_term6, out = d_or3);
-    Or(a = d_or1, b = d_or2, out = d_or4);
-    Or(a = d_or4, b = d_or3, out = d);
+    And(a=notB, b=notD, out=d1);
+    And(a=notA, b=C, out=d2);
+    And(a=notA, b=B, out=d3t);
+    And(a=d3t, b=D, out=d3);
+    And(a=A, b=notB, out=d4t);
+    And(a=d4t, b=notC, out=d4);
+    And(a=A, b=notD, out=d5);
+    And(a=B, b=C, out=d6);
+    Or(a=d1, b=d2, out=do1);
+    Or(a=d3, b=d4, out=do2);
+    Or(a=d5, b=d6, out=do3);
+    Or(a=do1, b=do2, out=do4);
+    Or(a=do4, b=do3, out=d);
 
     // Segment e
-    And(a = B, b = notD, out = e_term1);
-    And(a = notA, b = B, out = e_temp2);
-    And(a = e_temp2, b = notC, out = e_term2);
-    And(a = notC, b = notD, out = e_term3);
-    And(a = A, b = notB, out = e_term4);
-    And(a = A, b = C, out = e_term5);
-    Or(a = e_term1, b = e_term2, out = e_or1);
-    Or(a = e_term3, b = e_term4, out = e_or2);
-    Or(a = e_or1, b = e_or2, out = e_or3);
-    Or(a = e_or3, b = e_term5, out = e);
+    And(a=B, b=notD, out=e1);
+    And(a=notA, b=B, out=e2t);
+    And(a=e2t, b=notC, out=e2);
+    And(a=notC, b=notD, out=e3);
+    And(a=A, b=notB, out=e4);
+    And(a=A, b=C, out=e5);
+    Or(a=e1, b=e2, out=eo1);
+    Or(a=e3, b=e4, out=eo2);
+    Or(a=eo1, b=eo2, out=eo3);
+    Or(a=eo3, b=e5, out=e);
 
     // Segment f
-    And(a = C, b = notD, out = f_term1);
-    And(a = A, b = C, out = f_term2);
-    And(a = A, b = B, out = f_term3);
-    And(a = notB, b = notC, out = f_temp4);
-    And(a = f_temp4, b = notD, out = f_term4);
-    Or(a = f_term1, b = f_term2, out = f_or1);
-    Or(a = f_term3, b = f_term4, out = f_or2);
-    Or(a = f_or1, b = f_or2, out = f);
+    And(a=C, b=notD, out=f1);
+    And(a=A, b=C, out=f2);
+    And(a=A, b=B, out=f3);
+    And(a=notB, b=notC, out=f4t);
+    And(a=f4t, b=notD, out=f4);
+    Or(a=f1, b=f2, out=fo1);
+    Or(a=f3, b=f4, out=fo2);
+    Or(a=fo1, b=fo2, out=f);
 
     // Segment g
-    And(a = notA, b = B, out = g_term1);
-    And(a = A, b = notB, out = g_term2);
-    And(a = notC, b = D, out = g_term3);
-    And(a = notA, b = notC, out = g_term4);
-    And(a = notA, b = D, out = g_term5);
-    Or(a = g_term1, b = g_term2, out = g_or1);
-    Or(a = g_term3, b = g_term4, out = g_or2);
-    Or(a = g_or1, b = g_or2, out = g_or3);
-    Or(a = g_or3, b = g_term5, out = g);
+    And(a=notA, b=B, out=g1);
+    And(a=A, b=notB, out=g2);
+    And(a=notC, b=D, out=g3);
+    And(a=notA, b=notC, out=g4);
+    And(a=notA, b=D, out=g5);
+    Or(a=g1, b=g2, out=go1);
+    Or(a=g3, b=g4, out=go2);
+    Or(a=go1, b=go2, out=go3);
+    Or(a=go3, b=g5, out=g);
 
     // Counter logic
-    Mux16(a = prev_state, b = next_state, sel = inc, out = state_mux);
-    Mux16(a = state_mux, b = false, sel = reset, out = new_state);
-    Register(in = new_state, load = true, out[0] = D, out[1] = C, out[2] = B, out[3] = A, out = prev_state);
-    Inc16(in = prev_state, out = next_state);
+    Mux16(a=prev, b=next, sel=inc, out=muxOut);
+    Mux16(a=muxOut, b=false, sel=reset, out=newState);
+    Register(in=newState, load=true, out[0]=D, out[1]=C, out[2]=B, out[3]=A, out=prev);
+    Inc16(in=prev, out=next);
 }
