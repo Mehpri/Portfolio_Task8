@@ -1,192 +1,104 @@
-CHIP DisplayCounter201748294 {
-IN inc, reset;
-OUT a , b , c , d , e , f , g;
+// Input inversions
+    Not(in = A, out = notA);
+    Not(in = B, out = notB);
+    Not(in = C, out = notC);
+    Not(in = D, out = notD);
 
-PARTS:
-// All nots declared
-Not(in = A, out = NotA);
-Not(in = B, out = NotB);
-Not(in = C, out = NotC);
-Not(in = D, out = NotD);
+    // Segment a
+    And(a = notB, b = C, out = a_term1);
+    And(a = A, b = notB, out = a_term2);
+    And(a = notA, b = B, out = a_temp3);
+    And(a = a_temp3, b = notC, out = a_term3);
+    And(a = C, b = notD, out = a_term4);
+    And(a = A, b = D, out = a_term5);
+    Or(a = a_term1, b = a_term2, out = a_or1);
+    Or(a = a_term3, b = a_term4, out = a_or2);
+    Or(a = a_or1, b = a_or2, out = a_or3);
+    Or(a = a_or3, b = a_term5, out = a);
 
-// A chip
-// B'C
-And(a = NotB, b = C, out = term1a);
+    // Segment b
+    And(a = B, b = notC, out = b_temp1);
+    And(a = b_temp1, b = D, out = b_term1);
+    And(a = A, b = notB, out = b_temp2);
+    And(a = b_temp2, b = D, out = b_term2);
+    And(a = notA, b = notB, out = b_temp3);
+    And(a = b_temp3, b = notD, out = b_term3);
+    And(a = B, b = C, out = b_temp4);
+    And(a = b_temp4, b = notD, out = b_term4);
+    And(a = A, b = notC, out = b_term5);
+    And(a = notA, b = notB, out = b_temp6);
+    And(a = b_temp6, b = C, out = b_term6);
+    Or(a = b_term1, b = b_term2, out = b_or1);
+    Or(a = b_term3, b = b_term4, out = b_or2);
+    Or(a = b_term5, b = b_term6, out = b_or3);
+    Or(a = b_or1, b = b_or2, out = b_or4);
+    Or(a = b_or4, b = b_or3, out = b);
 
-// AB'
-And(a = A, b = NotB, out = term2a);
+    // Segment c
+    And(a = notA, b = notC, out = c_temp1);
+    And(a = c_temp1, b = notD, out = c_term1);
+    And(a = notA, b = C, out = c_temp2);
+    And(a = c_temp2, b = D, out = c_term2);
+    And(a = notB, b = notD, out = c_term3);
+    And(a = A, b = notC, out = c_temp4);
+    And(a = c_temp4, b = D, out = c_term4);
+    And(a = notA, b = notB, out = c_term5);
+    Or(a = c_term1, b = c_term2, out = c_or1);
+    Or(a = c_term3, b = c_term4, out = c_or2);
+    Or(a = c_or1, b = c_or2, out = c_or3);
+    Or(a = c_or3, b = c_term5, out = c);
 
-// A'BC'
-And(a = NotA, b = B, out = term3p1a);
-And(a = term3p1a, b = NotC, out = term3a);
+    // Segment d
+    And(a = notB, b = notD, out = d_term1);
+    And(a = notA, b = C, out = d_term2);
+    And(a = notA, b = B, out = d_temp3);
+    And(a = d_temp3, b = D, out = d_term3);
+    And(a = A, b = notB, out = d_temp4);
+    And(a = d_temp4, b = notC, out = d_term4);
+    And(a = A, b = notD, out = d_term5);
+    And(a = B, b = C, out = d_term6);
+    Or(a = d_term1, b = d_term2, out = d_or1);
+    Or(a = d_term3, b = d_term4, out = d_or2);
+    Or(a = d_term5, b = d_term6, out = d_or3);
+    Or(a = d_or1, b = d_or2, out = d_or4);
+    Or(a = d_or4, b = d_or3, out = d);
 
-// CD'
-And(a = C, b = NotD, out = term4a);
+    // Segment e
+    And(a = B, b = notD, out = e_term1);
+    And(a = notA, b = B, out = e_temp2);
+    And(a = e_temp2, b = notC, out = e_term2);
+    And(a = notC, b = notD, out = e_term3);
+    And(a = A, b = notB, out = e_term4);
+    And(a = A, b = C, out = e_term5);
+    Or(a = e_term1, b = e_term2, out = e_or1);
+    Or(a = e_term3, b = e_term4, out = e_or2);
+    Or(a = e_or1, b = e_or2, out = e_or3);
+    Or(a = e_or3, b = e_term5, out = e);
 
-// AD 
-And(a = A, b = D, out = term5a);
+    // Segment f
+    And(a = C, b = notD, out = f_term1);
+    And(a = A, b = C, out = f_term2);
+    And(a = A, b = B, out = f_term3);
+    And(a = notB, b = notC, out = f_temp4);
+    And(a = f_temp4, b = notD, out = f_term4);
+    Or(a = f_term1, b = f_term2, out = f_or1);
+    Or(a = f_term3, b = f_term4, out = f_or2);
+    Or(a = f_or1, b = f_or2, out = f);
 
-// Final expression
-Or(a = term1a, b = term2a, out = p1a);
-Or(a = term3a, b = term4a, out = p2a);
-Or(a = p1a, b = p2a, out = p3a);
-Or(a = p3a, b = term5a, out = a);
+    // Segment g
+    And(a = notA, b = B, out = g_term1);
+    And(a = A, b = notB, out = g_term2);
+    And(a = notC, b = D, out = g_term3);
+    And(a = notA, b = notC, out = g_term4);
+    And(a = notA, b = D, out = g_term5);
+    Or(a = g_term1, b = g_term2, out = g_or1);
+    Or(a = g_term3, b = g_term4, out = g_or2);
+    Or(a = g_or1, b = g_or2, out = g_or3);
+    Or(a = g_or3, b = g_term5, out = g);
 
-// B chip
-// BC'D -
-And(a = B, b = NotC, out = term1p1b);
-And(a = term1p1b, b = D, out = term1b);
-
-// AB'D -
-And(a = A, b = NotB, out = term2p1b);
-And(a = term2p1b, b = D, out = term2b);
-
-// A'B'D' -
-And(a = NotA, b = NotB, out = term3p1b);
-And(a = term3p1b, b = NotD, out = term3b);
-
-// BCD'-
-And(a = B, b = C, out = term4p1b);
-And(a = term4p1b, b = NotD, out = term4b);
-
-// AC' - 
-And(a = A, b = NotC, out = term5b);
-
-// A'B'C
-And(a = NotA, b = NotB, out = term6p1b);
-And(a = term6p1b, b = C, out = term6b);
-
-// Final expression
-Or(a = term1b, b = term2b, out = p1b);
-Or(a = term3b, b = term4b, out = p2b);
-Or(a = term5b, b = term6b, out = p3b);
-Or(a = p1b, b = p2b, out = p4b);
-Or(a = p4b, b = p3b, out = b);
-
-
-// C chip
-//A'C'D'
-And(a = NotA, b = NotC, out = term1p1c);
-And(a = term1p1c, b = NotD, out = term1c);
-
-// A'CD
-And(a = NotA, b = C, out = term2p1c);
-And(a = term2p1c, b = D, out = term2c);
-
-// B'D'
-And(a = NotB, b = NotD, out = term3c);
-
-// AC'D
-And(a = A, b = NotC, out = term4p1c);
-And(a = term4p1c, b = D, out = term4c);
-
-// A'B'
-And(a = NotA, b = NotB, out = term5c);
-
-// Final expression
-Or(a = term1c, b = term2c, out = p1c);
-Or(a = term3c, b = term4c, out = p2c);
-Or(a = p1c, b = p2c, out = p3c);
-Or(a = p3c, b = term5c, out = c);
-
-
-// D chip 
-// B'D'
-And(a = NotB, b = NotD, out = term1d);
-
-// A'C
-And(a = NotA, b = C, out = term2d);
-
-// A'BD
-And(a = NotA, b = B, out = term3p1d);
-And(a = term3p1d, b = D, out = term3d);
-
-// AB'C'
-And(a = A, b = NotB, out = term4p1d);
-And(a = term4p1d, b = NotC, out = term4d);
-
-// AD'
-And(a = A, b = NotD, out = term5d);
-
-//BC
-And(a = B, b = C, out = term6d);
-
-// Final expression
-Or(a = term1d, b = term2d, out = p1d);
-Or(a = term3d, b = term4d, out = p2d);
-Or(a = term5d, b = term6d, out = p3d);
-Or(a = p1d, b = p2d, out = p4d);
-Or(a = p4d, b = p3d, out = d);
-
-
-// E chip
-// BD'
-And(a = B, b = NotD, out = term1e);
-
-// A'BC'
-And(a = NotA, b = B, out = term2p1e);
-And(a = term2p1e, b = NotC, out = term2e);
-
-// CD'
-And(a = NotC, b = NotD, out = term3e);
-
-// AB'
-And(a = A, b = NotB, out = term4e);
-
-// AC
-And(a = A, b = C, out = term5e);
-
-// Final expression
-Or(a = term1e, b = term2e, out = p1e);
-Or(a = term3e, b = term4e, out = p2e);
-Or(a = p1e, b = p2e, out = p3e);
-Or(a = p3e, b = term5e, out = e);
-
-
-// F chip 
-// C and Not D
-And(a = C, b = NotD, out = term1f);
-
-// AC
-And(a = A, b = C, out = term2f);
-
-// AB
-And(a = A, b = B, out = term3f);
-
-// B'C'D'
-And(a = NotB, b = NotC, out = term4p1f);
-And(a = term4p1f, b = NotD, out = term4f);
-
-//Final expression
-Or(a = term1f, b = term2f, out = p1f);
-Or(a = term3f, b = term4f, out = p2f);
-Or(a = p1f, b = p2f, out = f);
-
-
-// G chip 
-// A'B
-And(a = NotA, b = B, out = term1g);
-
-// AB'
-And(a = A, b = NotB, out = term2g);
-
-// C'D
-And(a = NotC, b = D, out = term3g);
-
-// A'C'
-And(a = NotA, b = NotC, out = term4g);
-
-// A'D
-And(a = NotA, b = D, out = term5g);
-
-// Final expression
-Or(a = term1g, b = term2g, out = p1g);
-Or(a = term3g, b = term4g, out = p2g);
-Or(a = p1g, b = p2g, out = p3g);
-Or(a = p3g, b = term5g, out = g);
-
-Mux16(a = pl, b = lp, sel = inc, out = plz);
-Mux16(a = plz, b = false, sel = reset, out = pln);
-Register(in = pln, load = true, out[0] = D, out[1] = C, out[2] = B, out[3] = A, out = pl);
-Inc16(in =pl, out = lp);
-} 
+    // Counter logic
+    Mux16(a = prev_state, b = next_state, sel = inc, out = state_mux);
+    Mux16(a = state_mux, b = false, sel = reset, out = new_state);
+    Register(in = new_state, load = true, out[0] = D, out[1] = C, out[2] = B, out[3] = A, out = prev_state);
+    Inc16(in = prev_state, out = next_state);
+}
