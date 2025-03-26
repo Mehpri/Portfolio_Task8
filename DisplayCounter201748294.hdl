@@ -1,4 +1,9 @@
-// Input inversions
+CHIP DisplayCounter201748294 {
+    IN inc, reset;
+    OUT a, b, c, d, e, f, g;
+
+    PARTS:
+    // Input inversions
     Not(in = A, out = notA);
     Not(in = B, out = notB);
     Not(in = C, out = notC);
